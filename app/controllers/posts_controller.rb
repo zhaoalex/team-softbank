@@ -79,6 +79,8 @@ class PostsController < ApplicationController
 
     hash = {}
     @posts.each { |p| hash[p.id] = p.distance_to }
+    # HACK: wouldve been fixed by memcached...
+    hash = hash.first(25).to_h
     session[:post_loc_cache] = hash
 
     @posts = @posts.with_attached_image.limit(PAGE_LIMIT)
