@@ -17,7 +17,7 @@ function setLocHTML(latitude, longitude) {
 }
 
 function setHTML5Loc() {
-  if (false && 'geolocation' in navigator) {
+  if ('geolocation' in navigator) {
     $('#locfield').text('Computing location, please wait...');
     navigator.geolocation.getCurrentPosition(onSetSuccess, onSetError);
   } else {

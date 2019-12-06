@@ -16,7 +16,7 @@ function postLoc(latitude, longitude) {
 }
 
 function postHTML5Loc() {
-  if (false && 'geolocation' in navigator) {
+  if ('geolocation' in navigator) {
     // console.log('computing location');
     navigator.geolocation.getCurrentPosition(onPostSuccess, onPostError);
   } else {
