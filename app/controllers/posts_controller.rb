@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   # before_action :check_logged_in, only: [:create]
-  before_action :location, only: [:index, :show]
+  before_action :location, only: [:index, :show, :create]
   respond_to :html, :js
   PAGE_LIMIT = 25
 
@@ -41,7 +41,9 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     @post.save!
 
-    session[:post_loc_cache][@post.id] = @post.lonlat.distance(RGeo::Geographic.spherical_factory.point(create_params[:longitude], create_params[:latitude]))
+    # session[:post_loc_cache][@post.id] = (RGeo::Geographic.spherical_factory.point(@location.last, @location.first).distance(RGeo::Geographic.spherical_factory.point(create_params[:longitude], create_params[:latitude])) / 1609.34).round(2)
+    session[:post_loc_cache][@post.id] = 0
+
 
     redirect_to @post
   end
